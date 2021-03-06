@@ -2,6 +2,8 @@ package containerstack
 
 import (
     "fmt"
+    "sys"
+    "time"
 )
 
 type Containerstack struct {
@@ -9,6 +11,7 @@ type Containerstack struct {
     memorySize  int
     defaultTime int
     timeCircle  int
+    resourceV   int
 }
 
 type Containerstacker interface {
@@ -27,6 +30,7 @@ func (c *Containerstack) init() {
     c.capacity = 6
     c.timeCircle = 5
     c.defaultTime = 10
+    c.resourceV = 6
 }
 
 func (c *Containerstack) MemoryControl(ms, id int) {
@@ -67,14 +71,17 @@ func (c *Containerstack) Killing(id int) {
     }
 }
 
+// TODO: add signal control for Killing algorithm
 func (c *Containerstack) Hibernate() {
-
+    time.Sleep()
 }
 
 func (c *Containerstack) Close() {
-
+    c.memorySize = 0
+    c.timeCircle = 0
+    sys.exit()
 }
 
 func (c *Containerstack) Freezen() {
-
+    c.resourceV = 1
 }
